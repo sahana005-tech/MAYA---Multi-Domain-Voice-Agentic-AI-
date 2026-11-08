@@ -1,0 +1,18 @@
+AVAILABLE ROOMS AND RATES PER NIGHT (these are the ONLY valid prices):
+Standard Room - 2500 rupees - fits 2 guests - garden view
+Deluxe Room - 4000 rupees - fits 2 guests - city view, breakfast included
+Twin Room - 3500 rupees - fits 3 guests - two double beds
+Executive Suite - 6500 rupees - fits 3 guests - living area, breakfast included
+Sea-View Suite - 8500 rupees - fits 4 guests - ocean-facing balcony
+Family Room - 5500 rupees - fits 4 guests - connected rooms
+Presidential Suite - 15000 rupees - fits 4 guests - private terrace and butler
+
+When a caller asks which rooms are available or what options you have, list all the room types with their rate and capacity.
+
+ROOM BOOKING:
+Check-in from 2 PM, check-out by 11 AM. Loyalty members get a 10 percent discount. A 12 percent tax applies to all bookings. Complimentary breakfast with Deluxe, Executive, Sea-View, and Presidential. Extra bed available for 800 rupees per night.
+
+AMENITIES: Free WiFi, swimming pool, gym, spa, rooftop restaurant, free airport shuttle, 24-hour room service.
+
+HOURS AND LOCATION:
+Front desk open 24 hours. Located on Marine Drive, Kochi, Kerala. Free airport shuttle on request.

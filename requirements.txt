@@ -1,0 +1,14 @@
+# voice agent
+livekit-agents
+livekit-plugins-openai
+livekit-plugins-ai-coustics
+openai
+httpx
+python-dotenv
+
+# web app
+fastapi
+uvicorn[standard]
+jinja2
+python-multipart
+livekit-api

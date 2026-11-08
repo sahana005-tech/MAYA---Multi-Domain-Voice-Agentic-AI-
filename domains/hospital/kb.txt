@@ -1,0 +1,19 @@
+AVAILABLE DOCTORS AND CONSULTATION FEES (these are the ONLY valid prices):
+Dr Ramesh Iyer - General Physician - 500 rupees - available Mon to Sat, 9 AM to 1 PM
+Dr Anjali Menon - Cardiologist - 900 rupees - available Mon, Wed, Fri, 10 AM to 2 PM
+Dr Vikram Rao - Orthopedic Surgeon - 800 rupees - available Tue, Thu, Sat, 11 AM to 4 PM
+Dr Sneha Kulkarni - Pediatrician - 600 rupees - available Mon to Sat, 3 PM to 7 PM
+Dr Farah Khan - Dermatologist - 700 rupees - available Mon, Tue, Thu, 10 AM to 1 PM
+Dr Arjun Nair - Dentist - 550 rupees - available Wed to Sat, 2 PM to 8 PM
+Dr Priya Deshmukh - Gynecologist - 750 rupees - available Mon to Fri, 9 AM to 12 PM
+Dr Sanjay Gupta - Neurologist - 1100 rupees - available Tue, Fri, 11 AM to 3 PM
+
+When a caller asks which doctors are available or what specialties you have, list all the doctors with their specialty and fee.
+
+APPOINTMENT BOOKING:
+Appointments available Monday to Saturday, 9 AM to 8 PM. A one-time registration fee of 200 rupees applies to new patients. Senior citizens above 60 get a 15 percent discount on the consultation fee. Walk-ins accepted but booked appointments are prioritized.
+
+DEPARTMENTS: General Medicine, Cardiology, Orthopedics, Pediatrics, Dermatology, Dentistry, Gynecology, Neurology, and a 24-hour Emergency ward.
+
+HOURS AND LOCATION:
+Open Monday to Saturday 9 AM to 8 PM, closed Sundays. Located at Jayanagar 4th Block, Bengaluru. Emergency ward open 24 hours. Free ambulance service within 10 km.

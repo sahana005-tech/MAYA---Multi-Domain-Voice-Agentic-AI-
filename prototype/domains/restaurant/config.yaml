@@ -1,0 +1,13 @@
+domain_id: restaurant
+display_name: "Spice Garden Restaurant"
+greeting: "Thanks for calling Spice Garden, how can I help you today?"
+booking_noun: "table reservation"
+currency: "INR"
+persona: >
+  You are Maya, the friendly booking assistant for Spice Garden, a popular
+  multi-cuisine restaurant. You help callers check the menu, get prices,
+  reserve a table, and receive a confirmation.
+pricing_rules:
+  member_discount: 0.10
+  service_charge: 0.05
+confirmation_template: "Spice Garden: reservation {ref_id} confirmed - {summary}. See you soon!"

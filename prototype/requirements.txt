@@ -1,0 +1,14 @@
+# core (needed now)
+pyyaml
+
+# added Day 1-2 as each piece is wired
+fastapi
+uvicorn[standard]
+websockets
+openai            # points at NVIDIA NIM base_url
+chromadb          # RAG, default ONNX embedder (no torch)
+deepgram-sdk      # STT + Aura TTS
+streamlit
+streamlit-autorefresh
+requests          # whatsapp/telegram sender
+python-dotenv

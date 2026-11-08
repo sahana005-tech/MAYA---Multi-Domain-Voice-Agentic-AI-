@@ -1,0 +1,17 @@
+AVAILABLE FLIGHTS AND FARES PER PASSENGER, ONE WAY (these are the ONLY valid prices):
+Flight SL201 - Bengaluru to Delhi - departs 6 AM, arrives 8:45 AM - 4500 rupees
+Flight SL305 - Bengaluru to Mumbai - departs 8 AM, arrives 9:50 AM - 3200 rupees
+Flight SL410 - Bengaluru to Chennai - departs 10 AM, arrives 11:05 AM - 2100 rupees
+Flight SL512 - Bengaluru to Kolkata - departs 1 PM, arrives 3:40 PM - 5200 rupees
+Flight SL118 - Bengaluru to Hyderabad - departs 5 PM, arrives 6:10 PM - 2600 rupees
+Flight SL620 - Bengaluru to Goa - departs 7 AM, arrives 8:20 AM - 2900 rupees
+Flight SL725 - Bengaluru to Pune - departs 11 AM, arrives 12:40 PM - 3400 rupees
+Flight SL830 - Bengaluru to Jaipur - departs 2 PM, arrives 4:55 PM - 4800 rupees
+
+When a caller asks which flights are available or what routes you have, list all the flights with their route, departure time, and fare.
+
+FLIGHT BOOKING:
+Economy and Business class available. Business class is double the economy fare. SkyLink members get 8 percent off the fare. A convenience fee of 150 rupees applies per booking. Free cabin baggage up to 7 kg. Economy check-in baggage 15 kg, Business 30 kg.
+
+HOURS AND LOCATION:
+Booking counter and helpline open 24 hours. All departures from Kempegowda International Airport, Bengaluru. Web check-in opens 48 hours before departure.

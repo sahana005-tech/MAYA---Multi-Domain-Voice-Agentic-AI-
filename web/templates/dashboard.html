@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20120%20120%22%20width%3D%22120%22%20height%3D%22120%22%3E%0A%20%20%3Cdefs%3E%0A%20%20%20%20%3ClinearGradient%20id%3D%22mg%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%220%22%20stop-color%3D%22%233B82F6%22/%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%221%22%20stop-color%3D%22%231D4ED8%22/%3E%0A%20%20%20%20%3C/linearGradient%3E%0A%20%20%3C/defs%3E%0A%20%20%3Crect%20width%3D%22120%22%20height%3D%22120%22%20rx%3D%2230%22%20fill%3D%22url%28%23mg%29%22/%3E%0A%20%20%3Cg%20fill%3D%22%23FFFFFF%22%3E%0A%20%20%20%20%3Crect%20x%3D%2219%22%20y%3D%2236%22%20width%3D%2210%22%20height%3D%2252%22%20rx%3D%225%22/%3E%0A%20%20%20%20%3Crect%20x%3D%2237%22%20y%3D%2250%22%20width%3D%2210%22%20height%3D%2238%22%20rx%3D%225%22/%3E%0A%20%20%20%20%3Crect%20x%3D%2255%22%20y%3D%2264%22%20width%3D%2210%22%20height%3D%2224%22%20rx%3D%225%22/%3E%0A%20%20%20%20%3Crect%20x%3D%2273%22%20y%3D%2250%22%20width%3D%2210%22%20height%3D%2238%22%20rx%3D%225%22/%3E%0A%20%20%20%20%3Crect%20x%3D%2291%22%20y%3D%2236%22%20width%3D%2210%22%20height%3D%2252%22%20rx%3D%225%22/%3E%0A%20%20%20%20%3Ccircle%20cx%3D%2260%22%20cy%3D%2249%22%20r%3D%225.5%22/%3E%0A%20%20%3C/g%3E%0A%3C/svg%3E">
+<title>Maya — Multidomain Voice Agentic AI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/livekit-client/dist/livekit-client.umd.min.js"></script>
+<style>
+/* =====================================================================
+   MAYA — professional white theme
+   One brand blue (live / primary). Four muted business accents.
+   Token NAMES are kept from the previous theme because the JavaScript
+   reads them for chart colours (--sun --mint --sky --grape --pink ...).
+   ===================================================================== */
+:root{
+  --canvas:#FFFFFF;
+  --paper:#FFFFFF;
+  --paper-2:#F8FAFC;
+  --ink:#0B1220;
+  --ink-2:#475569;
+  --muted:#94A3B8;
+  --line:#E5E7EB;
+  --line-2:#EEF2F6;
+
+  --brand:#2563EB;  --brand-2:#1D4ED8; --brand-soft:#EFF6FF; --brand-line:#BFDBFE;
+
+  /* live / primary state (kept as --pink for the scripts) */
+  --pink:#2563EB;   --pink-soft:#EFF6FF;  --pink-line:#BFDBFE;
+  /* business accents */
+  --sun:#EA580C;    --sun-soft:#FFF7ED;   --sun-line:#FED7AA;   /* restaurant */
+  --mint:#059669;   --mint-soft:#ECFDF5;  --mint-line:#A7F3D0;  /* hospital   */
+  --sky:#0284C7;    --sky-soft:#F0F9FF;   --sky-line:#BAE6FD;   /* hotel      */
+  --grape:#7C3AED;  --grape-soft:#F5F3FF; --grape-line:#DDD6FE;  /* flight     */
+  --ok:#16A34A;     --bad:#DC2626;
+
+  --r-lg:18px;
+  --r-md:12px;
+  --r-pill:999px;
+
+  --sh-1:0 1px 2px rgba(15,23,42,.05);
+  --sh-2:0 1px 2px rgba(15,23,42,.04), 0 8px 24px -12px rgba(15,23,42,.14);
+  --sh-3:0 2px 4px rgba(15,23,42,.04), 0 24px 48px -20px rgba(15,23,42,.22);
+
+  --ease:cubic-bezier(.22,1,.36,1);
+  --spring:cubic-bezier(.34,1.4,.64,1);
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  min-height:100dvh;background:var(--canvas);color:var(--ink);
+  font-family:'Inter',system-ui,-apple-system,sans-serif;font-size:15px;line-height:1.55;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+body.locked{overflow:hidden}
+h1,h2,h3,.display{font-family:'Plus Jakarta Sans','Inter',sans-serif;letter-spacing:-.02em}
+.num{font-variant-numeric:tabular-nums}
+:focus-visible{outline:2px solid var(--brand);outline-offset:3px;border-radius:6px}
+button{font:inherit;color:inherit}
+
+/* ---------- background motion: dot grid + soft light ---------- */
+.wash{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.wash::before{
+  content:"";position:absolute;inset:-40px;
+  background-image:radial-gradient(rgba(37,99,235,.10) 1px, transparent 1.2px);
+  background-size:26px 26px;
+  mask-image:radial-gradient(ellipse 70% 55% at 50% 12%, #000 30%, transparent 75%);
+  -webkit-mask-image:radial-gradient(ellipse 70% 55% at 50% 12%, #000 30%, transparent 75%);
+  animation:gridDrift 30s linear infinite;
+}
+@keyframes gridDrift{to{transform:translate3d(26px,26px,0)}}
+.wash i{position:absolute;display:block;border-radius:50%;filter:blur(70px);will-change:transform}
+.wash .w1{width:520px;height:520px;background:#DBEAFE;top:-220px;right:-120px;opacity:.7;animation:float1 22s var(--ease) infinite alternate}
+.wash .w2{width:420px;height:420px;background:#E0E7FF;top:120px;left:-200px;opacity:.55;animation:float2 26s var(--ease) infinite alternate}
+.wash .w3{width:360px;height:360px;background:#CFFAFE;top:420px;right:12%;opacity:.35;animation:float1 30s var(--ease) infinite alternate-reverse}
+@keyframes float1{to{transform:translate3d(-60px,50px,0) scale(1.08)}}
+@keyframes float2{to{transform:translate3d(70px,-40px,0) scale(1.12)}}
+
+.shell{position:relative;z-index:1;max-width:1240px;margin:0 auto;padding:0 28px 64px}
+
+.rise{opacity:0;transform:translateY(14px);animation:rise .7s var(--ease) forwards;animation-delay:calc(var(--i,0) * 80ms)}
+@keyframes rise{to{opacity:1;transform:none}}
+
+/* ---------- top navigation ---------- */
+.topbar{
+  position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:18px;
+  margin:0 0 34px;padding:14px 0;
+}
+.topbar::before{
+  content:"";position:absolute;top:0;bottom:0;left:calc(50% - 50vw);right:calc(50% - 50vw);z-index:-1;
+  background:rgba(255,255,255,.84);backdrop-filter:saturate(180%) blur(14px);
+  -webkit-backdrop-filter:saturate(180%) blur(14px);border-bottom:1px solid var(--line);
+}
+.brand{display:flex;align-items:center;gap:11px;min-width:0}
+.orb-mini{width:36px;height:36px;flex:none;display:block;filter:drop-shadow(0 6px 12px rgba(37,99,235,.35))}
+.orb-mini .mb{transform-box:fill-box;transform-origin:50% 100%;animation:mwave 1.6s ease-in-out infinite}
+.orb-mini .mb2{animation-delay:.15s}.orb-mini .mb3{animation-delay:.3s}.orb-mini .mb4{animation-delay:.45s}.orb-mini .mb5{animation-delay:.6s}
+.orb-mini .md{transform-box:fill-box;transform-origin:50% 50%;animation:mdot 1.6s ease-in-out infinite .3s}
+@keyframes mwave{0%,100%{transform:scaleY(1)}50%{transform:scaleY(.62)}}
+@keyframes mdot{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.35);opacity:.75}}
+@keyframes eq{0%,100%{transform:scaleY(.45)}50%{transform:scaleY(1)}}
+.brand .who-app{font-family:'Plus Jakarta Sans','Inter',sans-serif;font-size:16px;font-weight:700;line-height:1.15}
+.brand .who-sub{font-size:12px;color:var(--muted);line-height:1.2}
+.bar-meta{display:flex;align-items:center;gap:8px;margin-left:auto;min-width:0}
+.chip{
+  display:inline-flex;align-items:center;gap:7px;flex:none;height:32px;padding:0 12px;
+  border-radius:var(--r-pill);font-size:12.5px;font-weight:500;white-space:nowrap;
+  background:var(--paper);border:1px solid var(--line);color:var(--ink-2);
+}
+.chip.ok{color:#15803D;border-color:#BBF7D0;background:#F0FDF4}
+.chip.warn{color:var(--bad);border-color:#FECACA;background:#FEF2F2}
+.chip #strip-domain{font-weight:600;color:var(--ink);text-transform:capitalize}
+.dot{width:7px;height:7px;border-radius:50%;background:currentColor;flex:none}
+.chip.ok .dot{box-shadow:0 0 0 0 rgba(22,163,74,.5);animation:ping 2s ease-out infinite}
+@keyframes ping{0%{box-shadow:0 0 0 0 rgba(22,163,74,.45)}100%{box-shadow:0 0 0 7px rgba(22,163,74,0)}}
+.user{display:flex;align-items:center;gap:10px;flex:none}
+.user .avatar{
+  width:32px;height:32px;border-radius:50%;display:grid;place-items:center;flex:none;
+  background:var(--brand-soft);color:var(--brand);font-weight:700;font-size:13px;
+  font-family:'Plus Jakarta Sans','Inter',sans-serif;
+}
+.user .name{font-size:13.5px;font-weight:600;max-width:150px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.user a{
+  height:32px;display:inline-flex;align-items:center;padding:0 14px;border-radius:var(--r-pill);
+  border:1px solid var(--line);color:var(--ink-2);font-size:13px;font-weight:500;text-decoration:none;
+  transition:border-color .2s var(--ease),color .2s var(--ease),background .2s var(--ease);
+}
+.user a:hover{border-color:var(--ink);color:var(--ink)}
+#neterr{display:none}
+#neterr.show{display:inline-flex}
+
+/* ---------- hero ---------- */
+.hero{position:relative;display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center;margin-bottom:96px}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:8px;height:30px;padding:0 12px 0 10px;margin-bottom:20px;
+  border-radius:var(--r-pill);background:var(--brand-soft);border:1px solid var(--brand-line);
+  color:var(--brand-2);font-size:12.5px;font-weight:600;
+  opacity:0;animation:rise .6s var(--ease) .05s forwards;
+}
+.eyebrow .dot{background:var(--brand);animation:ping2 2s ease-out infinite}
+@keyframes ping2{0%{box-shadow:0 0 0 0 rgba(37,99,235,.5)}100%{box-shadow:0 0 0 7px rgba(37,99,235,0)}}
+.title{position:relative;z-index:1}
+.title h1{margin:0}
+.title .line{
+  display:block;font-weight:800;font-size:clamp(2.4rem,5.6vw,4.3rem);line-height:1.02;letter-spacing:-.035em;
+  color:var(--ink);opacity:0;transform:translateY(18px);animation:rise .8s var(--ease) forwards;
+}
+.title .l1{animation-delay:.12s}
+.title .l2{animation-delay:.22s;
+  background:linear-gradient(90deg,#1D4ED8,#2563EB 40%,#0EA5E9 70%,#1D4ED8);background-size:220% 100%;
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  animation:rise .8s var(--ease) .22s forwards, sheen 7s linear 1.2s infinite;
+}
+.title .l3{animation-delay:.32s}
+@keyframes sheen{to{background-position:-220% 0}}
+.title p{
+  margin-top:20px;max-width:52ch;font-size:16px;line-height:1.65;color:var(--ink-2);
+  opacity:0;animation:rise .7s var(--ease) .45s forwards;
+}
+.facts{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px;opacity:0;animation:rise .7s var(--ease) .55s forwards}
+.fact{
+  display:inline-flex;align-items:center;gap:8px;height:34px;padding:0 13px;border-radius:var(--r-md);
+  background:var(--paper);border:1px solid var(--line);box-shadow:var(--sh-1);
+  font-size:13px;font-weight:500;color:var(--ink-2);
+}
+.fact b{color:var(--ink);font-weight:600}
+.fact svg{width:15px;height:15px;fill:var(--brand)}
+
+/* animated voice waveform behind the headline */
+.confetti{position:absolute;left:calc(50% - 50vw);right:calc(50% - 50vw);bottom:-118px;height:150px;z-index:0;pointer-events:none;opacity:.85}
+.confetti svg{width:100%;height:100%}
+.confetti path{fill:none;stroke-linecap:round}
+.confetti .wv1{stroke:url(#wg1);stroke-width:2.2;stroke-dasharray:14 10;animation:flow 6s linear infinite}
+.confetti .wv2{stroke:url(#wg2);stroke-width:1.6;opacity:.7;animation:flow 9s linear infinite reverse}
+.confetti .wv3{stroke:url(#wg1);stroke-width:1.2;opacity:.45;stroke-dasharray:4 8;animation:flow 12s linear infinite}
+@keyframes flow{to{stroke-dashoffset:-480}}
+.confetti g{animation:sway 8s ease-in-out infinite alternate;transform-origin:center}
+@keyframes sway{from{transform:translateY(-6px)}to{transform:translateY(6px)}}
+
+/* ---------- voice console ---------- */
+.panel{
+  position:relative;background:var(--paper);border:1px solid var(--line);
+  border-radius:var(--r-lg);box-shadow:var(--sh-2);overflow:hidden;
+}
+.phead{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:18px 22px 0}
+.phead h2{font-size:15.5px;font-weight:700;color:var(--ink)}
+.phead .count{font-size:12.5px;color:var(--muted);font-weight:500}
+#v-badge{
+  display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 10px;border-radius:var(--r-pill);
+  background:var(--paper-2);border:1px solid var(--line);color:var(--ink-2);font-weight:600;
+}
+.voice{position:relative;display:flex;flex-direction:column;align-items:center;padding:26px 24px 30px}
+.voice::before{
+  content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:radial-gradient(60% 55% at 50% 38%, rgba(37,99,235,.08), transparent 70%);
+}
+.stage{position:relative;z-index:1;width:200px;height:200px;display:grid;place-items:center}
+.stage::before{
+  content:"";position:absolute;width:150px;height:150px;border-radius:50%;
+  background:conic-gradient(from 0deg, rgba(37,99,235,0), rgba(37,99,235,.55), rgba(14,165,233,.35), rgba(37,99,235,0) 70%);
+  -webkit-mask:radial-gradient(circle, transparent 66px, #000 67px);
+          mask:radial-gradient(circle, transparent 66px, #000 67px);
+  animation:spin 5s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+.ring{position:absolute;inset:0;border-radius:50%;border:2px solid var(--brand);opacity:0}
+.stage.live .ring{animation:ripple 2.4s var(--ease) infinite}
+.stage.live .ring:nth-child(2){animation-delay:.8s}
+.stage.live .ring:nth-child(3){animation-delay:1.6s}
+@keyframes ripple{0%{transform:scale(.62);opacity:.55}80%{opacity:0}100%{transform:scale(1.1);opacity:0}}
+.mic{
+  position:relative;z-index:1;width:120px;height:120px;border:none;border-radius:50%;cursor:pointer;
+  background:linear-gradient(145deg,#3B82F6,#1D4ED8);
+  box-shadow:0 14px 30px -12px rgba(29,78,216,.75), inset 0 1px 0 rgba(255,255,255,.35);
+  display:grid;place-items:center;
+  transition:transform .35s var(--spring),box-shadow .3s var(--ease),background .4s var(--ease);
+}
+.mic:hover{transform:translateY(-2px) scale(1.03);box-shadow:0 20px 40px -14px rgba(29,78,216,.8), inset 0 1px 0 rgba(255,255,255,.35)}
+.mic:active{transform:scale(.97)}
+.mic svg{width:46px;height:46px;fill:#fff}
+.mic.on{background:linear-gradient(145deg,#EF4444,#B91C1C);box-shadow:0 14px 30px -12px rgba(185,28,28,.75), inset 0 1px 0 rgba(255,255,255,.3)}
+.voice.live .stage::before{animation-duration:2.2s}
+.wave{position:relative;z-index:1;display:flex;align-items:center;gap:4px;height:28px;margin-top:18px;opacity:.25;transition:opacity .4s var(--ease)}
+.wave span{width:4px;height:100%;border-radius:var(--r-pill);background:var(--brand);transform:scaleY(.18)}
+.voice.live .wave{opacity:1}
+.voice.live .wave span{animation:bar 1s ease-in-out infinite}
+.voice.live .wave span:nth-child(2){animation-delay:.12s}
+.voice.live .wave span:nth-child(3){animation-delay:.24s}
+.voice.live .wave span:nth-child(4){animation-delay:.08s}
+.voice.live .wave span:nth-child(5){animation-delay:.3s}
+.voice.live .wave span:nth-child(6){animation-delay:.18s}
+@keyframes bar{0%,100%{transform:scaleY(.18)}50%{transform:scaleY(1)}}
+.vstatus{position:relative;z-index:1;margin-top:14px;font-family:'Plus Jakarta Sans','Inter',sans-serif;font-size:18px;font-weight:700;text-align:center}
+.vhint{position:relative;z-index:1;margin-top:5px;font-size:13px;color:var(--muted);text-align:center;max-width:32ch}
+
+/* ---------- KPI cards ---------- */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:28px}
+.stat{
+  position:relative;padding:20px 20px 18px;border-radius:var(--r-lg);background:var(--paper);
+  border:1px solid var(--line);box-shadow:var(--sh-1);overflow:hidden;
+  transition:transform .35s var(--ease),box-shadow .35s var(--ease),border-color .35s var(--ease);
+}
+.stat:hover{transform:translateY(-3px);box-shadow:var(--sh-3);border-color:#D6DCE5}
+.stat::after{
+  content:"";position:absolute;left:0;right:0;top:0;height:3px;background:var(--acc);
+  transform:scaleX(0);transform-origin:left;transition:transform .5s var(--ease);
+}
+.stat:hover::after{transform:scaleX(1)}
+.stat .k{display:flex;align-items:center;gap:9px;font-size:13px;font-weight:500;color:var(--ink-2)}
+.stat .k::before{
+  content:"";width:26px;height:26px;border-radius:8px;flex:none;
+  background:var(--acc-soft) var(--icon) center/15px no-repeat;
+}
+.stat .v{font-family:'Plus Jakarta Sans','Inter',sans-serif;font-size:clamp(2rem,3.4vw,2.6rem);font-weight:800;letter-spacing:-.03em;line-height:1.05;margin-top:14px;color:var(--ink)}
+.stat .sub{font-size:12.5px;color:var(--muted);margin-top:4px;min-height:18px}
+.stat .sub.stars{letter-spacing:2px;color:#F59E0B;font-size:13px}
+.stat.s-active{--acc:var(--brand);--acc-soft:var(--brand-soft);
+  --icon:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%232563EB' d='M12 15a3 3 0 0 0 3-3V6a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3zm5-3a5 5 0 0 1-10 0H5a7 7 0 0 0 6 6.92V21h2v-2.08A7 7 0 0 0 19 12h-2z'/%3E%3C/svg%3E")}
+.stat.s-total{--acc:var(--sky);--acc-soft:var(--sky-soft);
+  --icon:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%230284C7' d='M20 2H4a2 2 0 0 0-2 2v18l4-4h14a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2z'/%3E%3C/svg%3E")}
+.stat.s-done{--acc:var(--mint);--acc-soft:var(--mint-soft);
+  --icon:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23059669' d='M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z'/%3E%3C/svg%3E")}
+.stat.s-rate{--acc:#F59E0B;--acc-soft:#FFFBEB;
+  --icon:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23F59E0B' d='M12 17.3 18.2 21l-1.6-7L22 9.2l-7.2-.6L12 2 9.2 8.6 2 9.2 7.5 14l-1.7 7z'/%3E%3C/svg%3E")}
+
+/* ---------- business switcher ---------- */
+.switcher{padding:20px 22px 22px}
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:16px}
+.tile{
+  --a:var(--brand);--as:var(--brand-soft);--al:var(--brand-line);
+  position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:12px;
+  padding:18px;border:1px solid var(--line);border-radius:var(--r-md);background:var(--paper);
+  text-align:left;cursor:pointer;box-shadow:var(--sh-1);
+  font-family:'Plus Jakarta Sans','Inter',sans-serif;font-size:15px;font-weight:700;color:var(--ink);
+  transition:transform .3s var(--ease),box-shadow .3s var(--ease),border-color .3s var(--ease),background .3s var(--ease);
+}
+.tile[data-d="restaurant"]{--a:var(--sun);--as:var(--sun-soft);--al:var(--sun-line)}
+.tile[data-d="hospital"]{--a:var(--mint);--as:var(--mint-soft);--al:var(--mint-line)}
+.tile[data-d="hotel"]{--a:var(--sky);--as:var(--sky-soft);--al:var(--sky-line)}
+.tile[data-d="flight"]{--a:var(--grape);--as:var(--grape-soft);--al:var(--grape-line)}
+.tile svg{width:38px;height:38px;padding:9px;border-radius:10px;fill:var(--a);background:var(--as);transition:transform .4s var(--spring)}
+.tile::after{
+  content:attr(data-sub);font-family:'Inter',sans-serif;font-size:12.5px;font-weight:500;color:var(--muted);margin-top:-6px;
+}
+.tile:hover{transform:translateY(-3px);box-shadow:var(--sh-3);border-color:var(--al)}
+.tile:hover svg{transform:scale(1.08) rotate(-4deg)}
+.tile:active{transform:translateY(-1px)}
+.tile.active{border-color:var(--a);background:linear-gradient(180deg,var(--as),#fff 70%);box-shadow:0 0 0 3px var(--as), var(--sh-2)}
+.tile.active::before{
+  content:"Active";position:absolute;top:14px;right:14px;height:22px;padding:0 9px;border-radius:var(--r-pill);
+  display:inline-flex;align-items:center;background:var(--a);color:#fff;
+  font-family:'Inter',sans-serif;font-size:11px;font-weight:600;
+}
+.tile.wobble{animation:bump .5s var(--spring)}
+@keyframes bump{0%{transform:scale(1)}40%{transform:scale(1.035)}100%{transform:scale(1)}}
+.dnote{
+  margin-top:0;max-height:0;overflow:hidden;font-size:13px;font-weight:500;color:var(--ok);
+  opacity:0;transform:translateY(-4px);transition:opacity .3s var(--ease),transform .3s var(--ease);
+}
+.dnote.show{opacity:1;transform:none;margin-top:14px;max-height:40px}
+.dnote.bad{color:var(--bad)}
+
+/* ---------- full-screen business takeover ---------- */
+.viewport{display:none}
+.viewport.show{
+  display:flex;flex-direction:column;position:fixed;inset:0;z-index:50;border-radius:0;border:0;
+  background:#fff;box-shadow:none;animation:takeover .55s var(--ease) both;
+}
+@keyframes takeover{from{opacity:0;transform:translateY(24px) scale(.985)}to{opacity:1;transform:none}}
+.viewport .phead{
+  padding:12px 20px;border-bottom:1px solid var(--line);background:rgba(255,255,255,.9);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);flex:none;justify-content:flex-start;gap:14px;
+}
+.viewport .vp-close{
+  order:-1;display:inline-flex;align-items:center;gap:7px;height:34px;padding:0 14px 0 11px;cursor:pointer;
+  border-radius:var(--r-pill);background:var(--paper);border:1px solid var(--line);color:var(--ink);
+  font-size:13px;font-weight:600;transition:border-color .2s var(--ease),transform .2s var(--ease);
+}
+.viewport .vp-close::before{content:"\2190";font-size:15px}
+.viewport .vp-close:hover{border-color:var(--ink);transform:translateX(-2px)}
+.viewport .vp-name{display:inline-flex;align-items:center;gap:9px;font-size:14.5px;font-weight:600;color:var(--ink-2)}
+.viewport .vp-name::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--bad);animation:ping3 1.8s ease-out infinite}
+@keyframes ping3{0%{box-shadow:0 0 0 0 rgba(220,38,38,.5)}100%{box-shadow:0 0 0 7px rgba(220,38,38,0)}}
+.viewport #vp-domain{color:var(--ink);font-weight:700;text-transform:capitalize}
+.viewport iframe{flex:1;width:100%;border:0;display:block;background:#fff}
+
+
+/* ---------- business switch transition ---------- */
+.vp-fx{
+  position:absolute;left:0;right:0;bottom:0;top:59px;z-index:3;display:grid;place-items:center;
+  background:#fff;opacity:0;visibility:hidden;pointer-events:none;
+  transition:opacity .45s var(--ease),visibility 0s linear .45s;
+}
+.viewport.switching .vp-fx{opacity:1;visibility:visible;transition:opacity .2s var(--ease)}
+.vp-fx::before{
+  content:"";position:absolute;inset:0;
+  background:radial-gradient(60% 50% at 50% 45%, var(--fx-soft), transparent 70%);
+}
+.vp-fx .fx-in{position:relative;display:flex;flex-direction:column;align-items:center;gap:18px}
+.vp-fx .fx-icon{
+  width:88px;height:88px;border-radius:24px;display:grid;place-items:center;background:var(--fx);
+  box-shadow:0 20px 44px -16px var(--fx);transform:scale(.6) rotate(-8deg);opacity:0;
+}
+.viewport.switching .fx-icon{animation:fxPop .55s var(--spring) forwards}
+@keyframes fxPop{to{transform:none;opacity:1}}
+.vp-fx .fx-icon svg{width:44px;height:44px;fill:#fff}
+.vp-fx .fx-ring{position:absolute;top:0;left:50%;width:88px;height:88px;margin-left:-44px;border-radius:24px;border:2px solid var(--fx);opacity:0}
+.viewport.switching .fx-ring{animation:fxRing 1.1s var(--ease) .15s infinite}
+@keyframes fxRing{0%{transform:scale(1);opacity:.55}100%{transform:scale(1.7);opacity:0}}
+.vp-fx .fx-label{font-family:'Plus Jakarta Sans','Inter',sans-serif;font-size:20px;font-weight:700;color:var(--ink);opacity:0;transform:translateY(8px)}
+.viewport.switching .fx-label{animation:rise .5s var(--ease) .12s forwards}
+.vp-fx .fx-bar{width:180px;height:4px;border-radius:4px;background:var(--line-2);overflow:hidden}
+.vp-fx .fx-bar i{display:block;height:100%;width:40%;border-radius:4px;background:var(--fx)}
+.viewport.switching .fx-bar i{animation:fxBar 1s var(--ease) infinite}
+@keyframes fxBar{0%{transform:translateX(-100%)}100%{transform:translateX(260%)}}
+.viewport iframe{transition:opacity .4s var(--ease),transform .5s var(--ease)}
+.viewport.switching iframe{opacity:0;transform:translateY(12px)}
+
+
+/* ---------- booking confirmed toast ---------- */
+.toast{
+  position:fixed;left:50%;top:84px;z-index:70;display:flex;align-items:center;gap:14px;
+  padding:14px 20px 14px 14px;border-radius:16px;background:#fff;border:1px solid #BBF7D0;
+  box-shadow:0 24px 50px -18px rgba(21,128,61,.45);transform:translate(-50%,-24px);opacity:0;pointer-events:none;
+  transition:transform .5s var(--spring),opacity .35s var(--ease);
+}
+.toast.show{transform:translate(-50%,0);opacity:1}
+.toast.warn{border-color:#FED7AA}
+.toast.warn .t-ico{background:#EA580C}
+.toast .t-ico{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;flex:none;
+  background:#16A34A;color:#fff;font-weight:800;font-size:18px;animation:tpop .6s var(--spring) .15s both}
+@keyframes tpop{0%{transform:scale(.4) rotate(-20deg);opacity:0}100%{transform:none;opacity:1}}
+.toast b{font-family:'Plus Jakarta Sans','Inter',sans-serif;font-size:15px;color:var(--ink)}
+.toast small{display:block;margin-top:2px;font-size:12.5px;color:var(--ink-2)}
+#toast-ref{font-family:ui-monospace,'SF Mono',Menlo,monospace;font-weight:600;color:#15803D}
+
+/* ---------- floating call widget ---------- */
+.fab{
+  position:fixed;right:24px;bottom:24px;z-index:60;display:none;align-items:center;gap:12px;
+  padding:9px 10px 9px 9px;border-radius:var(--r-pill);background:#0B1220;color:#fff;
+  box-shadow:0 18px 44px -14px rgba(11,18,32,.6);cursor:grab;touch-action:none;user-select:none;-webkit-user-select:none;
+}
+.fab.show{display:flex;animation:rise .5s var(--spring) both}
+.fab.dragging{cursor:grabbing}
+.fab .orb{width:40px;height:40px;border-radius:50%;flex:none;display:grid;place-items:center;
+  background:linear-gradient(145deg,#EF4444,#B91C1C);box-shadow:0 0 0 0 rgba(239,68,68,.6);animation:fabPing 1.8s ease-out infinite}
+@keyframes fabPing{0%{box-shadow:0 0 0 0 rgba(239,68,68,.55)}100%{box-shadow:0 0 0 10px rgba(239,68,68,0)}}
+.fab .orb svg{width:19px;height:19px;fill:#fff}
+.fab .meta{display:flex;flex-direction:column;line-height:1.2;min-width:100px}
+.fab .lbl{font-family:'Plus Jakarta Sans','Inter',sans-serif;font-size:13.5px;font-weight:700}
+.fab .sub{font-size:11.5px;color:#94A3B8;text-transform:none}
+.fab .wave{opacity:1;height:18px;margin:0;gap:3px}
+.fab .wave span{width:3px;background:#60A5FA;animation:bar 1s ease-in-out infinite}
+.fab .wave span:nth-child(2){animation-delay:.14s}
+.fab .wave span:nth-child(3){animation-delay:.28s}
+.fab .wave span:nth-child(4){animation-delay:.1s}
+.fab .end{height:34px;padding:0 15px;flex:none;border-radius:var(--r-pill);cursor:pointer;border:0;
+  background:#DC2626;color:#fff;font-size:12.5px;font-weight:600;transition:background .2s var(--ease)}
+.fab .end:hover{background:#B91C1C}
+
+/* ---------- lower bento ---------- */
+.bento{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:20px;margin-top:28px}
+.list{padding:8px 10px 12px}
+.row{
+  display:flex;align-items:center;gap:12px;padding:12px;border-radius:var(--r-md);font-size:13.5px;
+  animation:rowin .45s var(--ease) both;transition:background .2s var(--ease);
+}
+@keyframes rowin{from{opacity:0;transform:translateY(6px)}}
+.row:hover{background:var(--paper-2)}
+.row + .row{box-shadow:inset 0 1px 0 var(--line-2)}
+.tag{
+  display:inline-flex;align-items:center;gap:6px;flex:none;height:24px;padding:0 10px;border-radius:var(--r-pill);
+  font-size:12px;font-weight:600;text-transform:capitalize;border:1px solid;
+}
+.tag::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+.tag.restaurant{background:var(--sun-soft);border-color:var(--sun-line);color:#C2410C}
+.tag.hospital{background:var(--mint-soft);border-color:var(--mint-line);color:#047857}
+.tag.hotel{background:var(--sky-soft);border-color:var(--sky-line);color:#0369A1}
+.tag.flight{background:var(--grape-soft);border-color:var(--grape-line);color:#6D28D9}
+.tag.unknown{background:var(--paper-2);border-color:var(--line);color:var(--muted)}
+.row .id{color:var(--muted);font-size:12px;font-family:ui-monospace,'SF Mono',Menlo,monospace;flex:none}
+.row .tools{flex:1;color:var(--ink-2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+.row .st{font-weight:600;flex:none;font-size:12.5px}
+.row .st.done{color:var(--ok)}
+.row .st.active{color:var(--brand)}
+.row .rate{color:#D97706;font-weight:600;flex:none;font-size:12.5px}
+.empty{padding:44px 26px;text-align:center}
+.empty svg{width:44px;height:44px;fill:#CBD5E1}
+.empty h3{font-size:15.5px;font-weight:700;margin-top:12px}
+.empty p{font-size:13.5px;color:var(--muted);margin-top:4px}
+.skel{padding:14px 12px;display:flex;gap:12px;align-items:center}
+.skel i{display:block;height:13px;border-radius:var(--r-pill);
+  background:linear-gradient(90deg,#EEF2F6,#F8FAFC,#EEF2F6);background-size:220% 100%;animation:shimmer 1.4s linear infinite}
+.skel i:nth-child(1){width:80px;height:24px}
+.skel i:nth-child(2){width:60px}
+.skel i:nth-child(3){flex:1}
+@keyframes shimmer{to{background-position:-220% 0}}
+
+.charts{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px;padding:14px 18px 20px}
+.cbox{min-width:0;position:relative;padding:10px;border-radius:var(--r-md);background:var(--paper-2);border:1px solid var(--line-2)}
+.cbox .ct{font-size:12.5px;font-weight:600;color:var(--ink-2);text-align:center;margin-bottom:8px}
+canvas{max-height:190px}
+
+.foot{
+  display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;
+  margin-top:40px;padding-top:24px;border-top:1px solid var(--line);font-size:13.5px;color:var(--muted);
+}
+.foot b{color:var(--ink);font-weight:600}
+
+/* ---------- responsive ---------- */
+@media (max-width:1100px){ .bar-meta .chip.tech{display:none} }
+@media (max-width:960px){
+  .hero{grid-template-columns:1fr;gap:28px}
+  .bento{grid-template-columns:1fr}
+  .stats,.tiles{grid-template-columns:1fr 1fr}
+}
+@media (max-width:720px){
+  .shell{padding:0 16px 44px}
+  .topbar{margin:0 0 24px;padding:12px 0;flex-wrap:wrap;gap:10px}
+  .bar-meta{order:3;width:100%;margin-left:0;flex-wrap:wrap}
+  .user{margin-left:auto}
+  .user .name{display:none}
+  .charts{grid-template-columns:1fr}
+  .row .id{display:none}
+  .fab{right:12px;bottom:12px}
+  .fab .meta .sub{display:none}
+  .fab .meta{min-width:0}
+}
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important}
+  .rise,.title .line,.title p,.eyebrow,.facts{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<div class="wash" aria-hidden="true"><i class="w1"></i><i class="w2"></i><i class="w3"></i></div>
+
+<div class="shell">
+
+  <header class="topbar">
+    <div class="brand">
+      <svg class="orb-mini" viewBox="0 0 120 120" aria-hidden="true">
+        <defs><linearGradient id="mayaMark" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3B82F6"/><stop offset="1" stop-color="#1D4ED8"/></linearGradient></defs>
+        <rect width="120" height="120" rx="30" fill="url(#mayaMark)"/>
+        <g fill="#FFFFFF">
+          <rect class="mb" x="19" y="36" width="10" height="52" rx="5"/>
+          <rect class="mb mb2" x="37" y="50" width="10" height="38" rx="5"/>
+          <rect class="mb mb3" x="55" y="64" width="10" height="24" rx="5"/>
+          <rect class="mb mb4" x="73" y="50" width="10" height="38" rx="5"/>
+          <rect class="mb mb5" x="91" y="36" width="10" height="52" rx="5"/>
+          <circle class="md" cx="60" cy="49" r="5.5"/>
+        </g>
+      </svg>
+      <div>
+        <div class="who-app">Maya</div>
+        <div class="who-sub">Voice Agent Platform</div>
+      </div>
+    </div>
+    <div class="bar-meta">
+      <span class="chip ok"><span class="dot"></span>All systems operational</span>
+      <span class="chip">Active business: <span id="strip-domain">—</span></span>
+      <span class="chip tech">Speech → Agent → Speech</span>
+      <a class="chip warn" id="ec-warn" href="/profile" style="display:none;text-decoration:none">Add an emergency contact</a>
+      <span class="chip warn" id="neterr">Connection lost — retrying</span>
+    </div>
+    <div class="user">
+      <span class="avatar" id="avatar">U</span>
+      <span class="name" id="uname">{{ user_name }}</span>
+      <a href="/profile" id="profile-link">Profile</a>
+      <a href="/logout">Sign out</a>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="confetti" aria-hidden="true">
+      <svg viewBox="0 0 1200 220" preserveAspectRatio="none">
+        <defs>
+          <linearGradient id="wg1" x1="0" x2="1"><stop offset="0" stop-color="#2563EB" stop-opacity="0"/><stop offset=".35" stop-color="#2563EB" stop-opacity=".5"/><stop offset=".7" stop-color="#0EA5E9" stop-opacity=".45"/><stop offset="1" stop-color="#0EA5E9" stop-opacity="0"/></linearGradient>
+          <linearGradient id="wg2" x1="0" x2="1"><stop offset="0" stop-color="#6366F1" stop-opacity="0"/><stop offset=".5" stop-color="#6366F1" stop-opacity=".35"/><stop offset="1" stop-color="#6366F1" stop-opacity="0"/></linearGradient>
+        </defs>
+        <g>
+          <path class="wv1" d="M0 110 C 80 40, 160 180, 240 110 S 400 40, 480 110 S 640 180, 720 110 S 880 40, 960 110 S 1120 180, 1200 110"/>
+          <path class="wv2" d="M0 110 C 100 70, 200 150, 300 110 S 500 70, 600 110 S 800 150, 900 110 S 1100 70, 1200 110"/>
+          <path class="wv3" d="M0 110 C 60 20, 120 200, 180 110 S 300 20, 360 110 S 480 200, 540 110 S 660 20, 720 110 S 840 200, 900 110 S 1020 20, 1080 110 S 1160 170, 1200 110"/>
+        </g>
+      </svg>
+    </div>
+    <div class="title">
+      <span class="eyebrow"><span class="dot"></span>Live voice agent · 4 industries</span>
+      <h1>
+        <span class="line l1">MULTIDOMAIN</span>
+        <span class="line l2">VOICE</span>
+        <span class="line l3">AGENTIC AI</span>
+      </h1>
+      <p>Speak naturally. Maya understands the request, opens the right business on screen, compares the options, completes the booking and sends the confirmation — without a single click.</p>
+      <div class="facts">
+        <span class="fact"><svg viewBox="0 0 24 24"><path d="M12 15a3 3 0 0 0 3-3V6a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3zm5-3a5 5 0 0 1-10 0H5a7 7 0 0 0 6 6.92V21h2v-2.08A7 7 0 0 0 19 12h-2z"/></svg><b>Real-time</b> speech</span>
+        <span class="fact"><svg viewBox="0 0 24 24"><path d="M4 4h7v7H4zm9 0h7v7h-7zM4 13h7v7H4zm9 0h7v7h-7z"/></svg><b>22</b> businesses</span>
+        <span class="fact"><svg viewBox="0 0 24 24"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>Books &amp; <b>confirms</b></span>
+      </div>
+    </div>
+
+    <section class="panel rise" style="--i:1">
+      <div class="phead">
+        <h2>Voice console</h2>
+        <span class="count" id="v-badge">Offline</span>
+      </div>
+      <div class="voice" id="voice-block">
+        <div class="stage">
+          <span class="ring"></span><span class="ring"></span><span class="ring"></span>
+          <button class="mic" id="mic" onclick="toggle()" aria-label="Start a voice call with Maya">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15a3 3 0 0 0 3-3V6a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3zm5-3a5 5 0 0 1-10 0H5a7 7 0 0 0 6 6.92V21h2v-2.08A7 7 0 0 0 19 12h-2z"/></svg>
+          </button>
+        </div>
+        <div class="wave" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+        <div class="vstatus" id="v-status">Tap to start a call</div>
+        <div class="vhint">Allow the microphone, then just speak. Say “hotel”, “restaurant”, “doctor” or “flight”.</div>
+      </div>
+    </section>
+  </section>
+
+  <section class="stats rise" style="--i:2">
+    <div class="stat s-active">
+      <div class="k">Active calls</div>
+      <div class="v num" id="m-active">0</div>
+      <div class="sub" id="m-active-sub">idle</div>
+    </div>
+    <div class="stat s-total">
+      <div class="k">Conversations</div>
+      <div class="v num" id="m-total">0</div>
+      <div class="sub">total handled</div>
+    </div>
+    <div class="stat s-done">
+      <div class="k">Tasks completed</div>
+      <div class="v num" id="m-done">0</div>
+      <div class="sub" id="m-books">0 bookings</div>
+    </div>
+    <div class="stat s-rate">
+      <div class="k">Satisfaction</div>
+      <div class="v num" id="m-rate">n/a</div>
+      <div class="sub stars" id="m-stars"></div>
+    </div>
+  </section>
+
+  <section class="panel rise" style="--i:3">
+    <div class="switcher">
+      <div class="phead" style="padding:0">
+        <h2>Businesses</h2>
+        <span class="count">One agent · four industries</span>
+      </div>
+      <div class="tiles">
+        <button class="tile" data-d="restaurant" data-sub="6 restaurants" onclick="switchD('restaurant')">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 9H9V2H7v7H5V2H3v7c0 2.12 1.66 3.84 3.75 3.97V22h2.5v-9.03C11.34 12.84 13 11.12 13 9V2h-2v7zm5-3v8h2.5v8H21V2c-2.76 0-5 2.24-5 4z"/></svg>
+          Restaurants
+        </button>
+        <button class="tile" data-d="hospital" data-sub="5 hospitals" onclick="switchD('hospital')">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2zm-2 10h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/></svg>
+          Hospitals
+        </button>
+        <button class="tile" data-d="hotel" data-sub="6 hotels" onclick="switchD('hotel')">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 13a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm12-6h-8v7H3V5H1v15h2v-3h18v3h2v-9a4 4 0 0 0-4-4z"/></svg>
+          Hotels
+        </button>
+        <button class="tile" data-d="flight" data-sub="5 airlines" onclick="switchD('flight')">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5L21 16z"/></svg>
+          Flights
+        </button>
+      </div>
+      <div class="dnote" id="dnote"></div>
+    </div>
+  </section>
+
+  <section class="panel viewport" id="viewport">
+    <div class="phead">
+      <h2 class="vp-name">Live · <span id="vp-domain">hotel</span></h2>
+      <button class="vp-close" onclick="closeViewport()">Dashboard</button>
+    </div>
+    <div class="vp-fx" id="vp-fx" aria-hidden="true">
+      <div class="fx-in">
+        <span class="fx-ring"></span>
+        <div class="fx-icon" id="fx-icon"></div>
+        <div class="fx-label" id="fx-label">Opening</div>
+        <div class="fx-bar"><i></i></div>
+      </div>
+    </div>
+    <iframe id="vp-frame" title="Business detail" src="about:blank"></iframe>
+  </section>
+
+  <div class="bento">
+    <section class="panel rise" style="--i:4">
+      <div class="phead">
+        <h2>Recent conversations</h2>
+        <span class="count" id="c-count"></span>
+      </div>
+      <div class="list" id="conv">
+        <div class="skel"><i></i><i></i><i></i></div>
+        <div class="skel"><i></i><i></i><i></i></div>
+        <div class="skel"><i></i><i></i><i></i></div>
+      </div>
+    </section>
+
+    <section class="panel rise" style="--i:5">
+      <div class="phead"><h2>Analytics</h2></div>
+      <div class="charts">
+        <div class="cbox"><div class="ct">Calls by business</div><canvas id="donut"></canvas></div>
+        <div class="cbox"><div class="ct">Ratings given</div><canvas id="bars"></canvas></div>
+      </div>
+    </section>
+  </div>
+
+  <div class="foot">Multidomain Voice Agentic AI <span>·</span> <b>One agent, any business.</b></div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite">
+  <span class="t-ico">✓</span>
+  <div><b><span id="toast-dom">Booking</span> booking confirmed</b>
+  <small>Reference <span id="toast-ref"></span> · <span id="toast-note">confirmation and calendar link sent</span></small></div>
+</div>
+
+<div class="fab" id="fab" title="Drag to move">
+  <div class="orb" aria-hidden="true">
+    <svg viewBox="0 0 24 24"><path d="M12 15a3 3 0 0 0 3-3V6a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3zm5-3a5 5 0 0 1-10 0H5a7 7 0 0 0 6 6.92V21h2v-2.08A7 7 0 0 0 19 12h-2z"/></svg>
+  </div>
+  <div class="wave" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+  <div class="meta">
+    <span class="lbl">On call with Maya</span>
+    <span class="sub" id="fab-sub">Listening</span>
+  </div>
+  <button class="end" onclick="toggle()">End call</button>
+</div>
+
+<script>
+/* ============================================================
+   Behaviour is unchanged from the previous dashboard.
+   Same endpoints: /api/token, /api/active-domain, /api/switch-domain,
+   /api/metrics, /api/conversations. Same element ids. Same functions.
+   ============================================================ */
+const LK = window.LivekitClient;
+let room = null, connected = false;
+let donut = null, bars = null, firstPaint = true;
+const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+const cssVar = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const DOMAIN_COLOR = {
+  restaurant:'--sun', hospital:'--mint', hotel:'--sky', flight:'--grape'
+};
+const FALLBACK = ['--pink','--sky','--mint','--sun','--grape'];
+
+function stars(n){ const r = Math.round(n); return '\u2605'.repeat(r) + '\u2606'.repeat(5 - r); }
+function title(s){ return s ? s.charAt(0).toUpperCase() + s.slice(1) : s; }
+
+/* count-up so numbers land instead of snapping */
+function setNum(el, val, decimals){
+  const d = decimals || 0;
+  if (val === null || val === undefined) { el.textContent = 'n/a'; el.dataset.v = ''; return; }
+  const to = Number(val);
+  if (!isFinite(to)) { el.textContent = val; return; }
+  const from = parseFloat(el.dataset.v);
+  el.dataset.v = to;
+  if (reduced || !isFinite(from) || from === to) { el.textContent = to.toFixed(d); return; }
+  const t0 = performance.now(), dur = 520;
+  (function step(t){
+    const p = Math.min(1, (t - t0) / dur);
+    const e = 1 - Math.pow(1 - p, 3);
+    el.textContent = (from + (to - from) * e).toFixed(d);
+    if (p < 1) requestAnimationFrame(step);
+  })(performance.now());
+}
+
+function netError(on){ document.getElementById('neterr').classList.toggle('show', !!on); }
+
+async function toggle(){
+  const mic = document.getElementById('mic');
+  const block = document.getElementById('voice-block');
+  const stage = document.querySelector('.stage');
+  const st = document.getElementById('v-status');
+  const bd = document.getElementById('v-badge');
+
+  if (connected) {
+    await room.disconnect();
+    connected = false;
+    mic.classList.remove('on'); block.classList.remove('live'); stage.classList.remove('live');
+    document.getElementById('fab').classList.remove('show');
+    st.textContent = 'Tap to start a call';
+    bd.textContent = 'Offline';
+    return;
+  }
+
+  st.textContent = 'Connecting';
+  try {
+    const r = await fetch('/api/token');
+    const d = await r.json();
+    room = new LK.Room();
+    room.on(LK.RoomEvent.TrackSubscribed, (t) => { if (t.kind === 'audio') t.attach(); });
+    if (LK.RoomEvent && LK.RoomEvent.ActiveSpeakersChanged) {
+      room.on(LK.RoomEvent.ActiveSpeakersChanged, (speakers) => {
+        const me = room.localParticipant && room.localParticipant.identity;
+        const talking = speakers.some(p => p.identity !== me);
+        if (agentSpeaking && !talking) agentQuietSince = performance.now();
+        agentSpeaking = talking;
+      });
+    }
+    await room.connect(d.url, d.token);
+    await room.localParticipant.setMicrophoneEnabled(true);
+    connected = true;
+    mic.classList.add('on'); block.classList.add('live'); stage.classList.add('live');
+    document.getElementById('fab').classList.add('show');
+    st.textContent = 'Listening — go ahead';
+    shareLocation();
+    bd.textContent = 'Live';
+  } catch (e) {
+    st.textContent = 'Could not connect';
+    document.getElementById('v-badge').textContent = 'Error';
+    console.error(e);
+  }
+}
+
+let seenDomain = null;
+let seenViewTs = null;
+let vpDomain = null;
+
+function openViewport(dom){
+  vpDomain = dom;
+  const sub = document.getElementById('fab-sub');
+  if (sub) sub.textContent = 'Showing ' + dom;
+  const vp = document.getElementById('viewport');
+  document.getElementById('vp-domain').textContent = dom;
+  // branded transition while the business page loads underneath
+  const FX = { restaurant:['#EA580C','#FFEDD5','Restaurants'], hospital:['#059669','#D1FAE5','Hospitals'],
+               hotel:['#0284C7','#E0F2FE','Hotels'], flight:['#7C3AED','#EDE9FE','Flights'] }[dom] || ['#2563EB','#DBEAFE','Business'];
+  vp.style.setProperty('--fx', FX[0]); vp.style.setProperty('--fx-soft', FX[1]);
+  document.getElementById('fx-label').textContent = 'Opening ' + FX[2];
+  const tileIcon = document.querySelector('.tile[data-d="' + dom + '"] svg');
+  const iconBox = document.getElementById('fx-icon');
+  iconBox.innerHTML = tileIcon ? tileIcon.outerHTML : '';
+  vp.classList.remove('switching'); void vp.offsetWidth; vp.classList.add('switching');
+  const frame = document.getElementById('vp-frame');
+  const began = performance.now();
+  frame.onload = () => {
+    if (frame.src.endsWith('about:blank')) return;
+    const wait = Math.max(0, (reduced ? 0 : 750) - (performance.now() - began));
+    setTimeout(() => vp.classList.remove('switching'), wait);
+  };
+  frame.src = '/domain/' + dom;
+  vp.classList.add('show');
+  document.body.classList.add('locked');
+  // Look and behave like a real page: address bar, tab title, back button.
+  const path = '/domain/' + dom;
+  if (location.pathname !== path) {
+    if (location.pathname.startsWith('/domain/')) history.replaceState({ vp: dom }, '', path);
+    else history.pushState({ vp: dom }, '', path);
+  }
+  document.title = dom.charAt(0).toUpperCase() + dom.slice(1) + ' \u2014 Maya';
+}
+
+function closeViewport(fromHistory){
+  vpDomain = null;
+  if (!fromHistory && location.pathname.startsWith('/domain/')) history.replaceState({}, '', '/');
+  document.title = 'Maya \u2014 Multidomain Voice Agentic AI';
+  const vp = document.getElementById('viewport');
+  vp.classList.remove('show');
+  document.body.classList.remove('locked');
+  const sub = document.getElementById('fab-sub');
+  if (sub) sub.textContent = 'Listening';
+  document.getElementById('vp-frame').src = 'about:blank';
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && vpDomain) closeViewport();
+});
+
+// Browser back button closes the business page instead of leaving the call.
+window.addEventListener('popstate', () => {
+  if (vpDomain && !location.pathname.startsWith('/domain/')) closeViewport(true);
+});
+
+async function loadActive(){
+  try {
+    const r = await fetch('/api/active-domain');
+    const d = await r.json();
+    document.querySelectorAll('.tile').forEach(b => b.classList.toggle('active', b.dataset.d === d.active));
+    document.getElementById('strip-domain').textContent = title(d.active);
+
+    if (seenDomain === null) {
+      seenDomain = d.active;
+    } else if (d.active !== seenDomain) {
+      seenDomain = d.active;
+      // Maya switched the business mid-call. If a call is live, show the page
+      // inside this one so the WebRTC connection is not torn down.
+      if (connected) {
+        openViewport(d.active);
+        const note = document.getElementById('dnote');
+        note.classList.remove('bad');
+        note.textContent = 'Maya opened the ' + d.active + ' page.';
+        note.classList.add('show');
+        setTimeout(() => note.classList.remove('show'), 4000);
+      } else {
+        location.href = '/domain/' + d.active;
+      }
+    }
+  } catch (e) {}
+}
+
+async function switchD(dom){
+  const note = document.getElementById('dnote');
+  const btn = document.querySelector('.tile[data-d="' + dom + '"]');
+  try {
+    const fd = new FormData();
+    fd.append('domain', dom);
+    await fetch('/api/switch-domain', { method:'POST', body:fd });
+    document.querySelectorAll('.tile').forEach(b => b.classList.toggle('active', b.dataset.d === dom));
+    document.getElementById('strip-domain').textContent = title(dom);
+    if (btn && !reduced) {
+      btn.classList.remove('wobble');
+      void btn.offsetWidth;
+      btn.classList.add('wobble');
+    }
+    note.classList.remove('bad');
+    seenDomain = dom;
+    if (connected) {
+      // A page load would tear down the WebRTC session, so show it in the panel.
+      openViewport(dom);
+      note.textContent = 'Showing ' + dom + '. Maya is still on the call.';
+      note.classList.add('show');
+      setTimeout(() => note.classList.remove('show'), 4000);
+    } else {
+      note.textContent = 'Switched to ' + dom + '. Opening the ' + dom + ' page.';
+      note.classList.add('show');
+      setTimeout(() => { location.href = '/domain/' + dom; }, reduced ? 0 : 600);
+    }
+  } catch (e) {
+    note.classList.add('bad', 'show');
+    note.textContent = 'Switch failed. Check that the web server is still running.';
+  }
+}
+
+function renderConversations(list){
+  const box = document.getElementById('conv');
+  const count = document.getElementById('c-count');
+  if (!list.length) {
+    count.textContent = '';
+    box.innerHTML = '<div class="empty">' +
+      '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 2H4a2 2 0 0 0-2 2v18l4-4h14a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2zM7 9h10v2H7V9zm0 4h7v2H7v-2z"/></svg>' +
+      '<h3>No calls yet</h3>' +
+      '<p>Tap the mic and say hello. Every call Maya handles shows up here.</p></div>';
+    return;
+  }
+  count.textContent = list.length + (list.length === 1 ? ' call' : ' calls');
+  box.innerHTML = list.map((v, i) => {
+    const delay = firstPaint && !reduced ? ('style="animation-delay:' + (i * 45) + 'ms"') : 'style="animation:none"';
+    return '<div class="row" ' + delay + '>' +
+      '<span class="tag ' + v.domain + '">' + v.domain + '</span>' +
+      '<span class="id">' + v.id.slice(0, 8) + '</span>' +
+      '<span class="tools">' + (v.tools.join(', ') || 'no tools used') + '</span>' +
+      '<span class="st ' + (v.completed ? 'done' : 'active') + '">' + (v.completed ? 'Done' : title(v.status)) + '</span>' +
+      (v.rating ? '<span class="rate">\u2605 ' + v.rating + '</span>' : '') +
+      '</div>';
+  }).join('');
+}
+
+function chartFont(){ return { family:'Inter', size:11 }; }
+
+function paintCharts(domains, conversations){
+  const ink = cssVar('--ink-2'), hair = cssVar('--line'), paper = cssVar('--paper');
+  const labels = domains.map(d => title(d.domain));
+  const counts = domains.map(d => d.count);
+  const colors = domains.map((d, i) => cssVar(DOMAIN_COLOR[d.domain] || FALLBACK[i % FALLBACK.length]));
+
+  if (!donut) {
+    donut = new Chart(document.getElementById('donut'), {
+      type:'doughnut',
+      data:{ labels, datasets:[{ data:counts, backgroundColor:colors, borderColor:paper, borderWidth:4, borderRadius:8, hoverOffset:8 }] },
+      options:{
+        cutout:'62%',
+        animation:{ duration: reduced ? 0 : 700 },
+        plugins:{ legend:{ position:'bottom', labels:{ font:chartFont(), color:ink, boxWidth:8, boxHeight:8, usePointStyle:true, pointStyle:'circle', padding:12 } } }
+      }
+    });
+  } else {
+    donut.data.labels = labels;
+    donut.data.datasets[0].data = counts;
+    donut.data.datasets[0].backgroundColor = colors;
+    donut.data.datasets[0].borderColor = paper;
+    donut.update();
+  }
+
+  const dist = [0,0,0,0,0];
+  (conversations || []).forEach(v => { if (v.rating >= 1 && v.rating <= 5) dist[v.rating - 1]++; });
+  if (!bars) {
+    bars = new Chart(document.getElementById('bars'), {
+      type:'bar',
+      data:{ labels:['1','2','3','4','5'], datasets:[{ data:dist, backgroundColor:cssVar('--brand'), borderRadius:10, borderSkipped:false, maxBarThickness:34 }] },
+      options:{
+        animation:{ duration: reduced ? 0 : 700 },
+        plugins:{ legend:{ display:false } },
+        scales:{
+          y:{ beginAtZero:true, ticks:{ stepSize:1, font:chartFont(), color:ink }, grid:{ color:hair, drawTicks:false }, border:{ display:false } },
+          x:{ ticks:{ font:chartFont(), color:ink }, grid:{ display:false }, border:{ display:false } }
+        }
+      }
+    });
+  } else {
+    bars.data.datasets[0].data = dist;
+    bars.data.datasets[0].backgroundColor = cssVar('--brand');
+    bars.update();
+  }
+}
+
+async function tick(){
+  try {
+    const [mR, cR] = await Promise.all([fetch('/api/metrics'), fetch('/api/conversations')]);
+    if (mR.status === 401) { location.href = '/login'; return; }
+    const m = await mR.json(), c = await cR.json();
+    netError(false);
+
+    setNum(document.getElementById('m-active'), m.active_calls);
+    document.getElementById('m-active-sub').textContent = m.active_calls > 0 ? 'in progress' : 'idle';
+    setNum(document.getElementById('m-total'), m.total_conversations);
+    setNum(document.getElementById('m-done'), m.tasks_completed);
+    document.getElementById('m-books').textContent = m.total_bookings + (m.total_bookings === 1 ? ' booking' : ' bookings');
+    setNum(document.getElementById('m-rate'), m.avg_rating, 1);
+    document.getElementById('m-stars').textContent = m.avg_rating != null ? stars(m.avg_rating) : 'no ratings yet';
+
+    renderConversations(c.conversations || []);
+    paintCharts(m.domains, c.conversations);
+    firstPaint = false;
+  } catch (e) {
+    netError(true);
+  }
+}
+
+/* repaint charts if the OS flips between light and dark */
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+  if (donut) { donut.destroy(); donut = null; }
+  if (bars) { bars.destroy(); bars = null; }
+  tick();
+});
+
+/* draggable floating call widget, kept inside the viewport */
+(function(){
+  const fab = document.getElementById('fab');
+  let x = 0, y = 0, ox = 0, oy = 0, dragging = false;
+
+  function clamp(){
+    const r = fab.getBoundingClientRect();
+    const maxRight = window.innerWidth - 8, maxBottom = window.innerHeight - 8;
+    if (r.left < 8) x += 8 - r.left;
+    if (r.top < 8) y += 8 - r.top;
+    if (r.right > maxRight) x -= r.right - maxRight;
+    if (r.bottom > maxBottom) y -= r.bottom - maxBottom;
+    fab.style.transform = 'translate(' + x + 'px,' + y + 'px)';
+  }
+
+  fab.addEventListener('pointerdown', e => {
+    if (e.target.closest('.end')) return;
+    dragging = true; ox = e.clientX - x; oy = e.clientY - y;
+    fab.setPointerCapture(e.pointerId);
+    fab.classList.add('dragging');
+  });
+  fab.addEventListener('pointermove', e => {
+    if (!dragging) return;
+    x = e.clientX - ox; y = e.clientY - oy;
+    fab.style.transform = 'translate(' + x + 'px,' + y + 'px)';
+  });
+  const stop = () => { if (!dragging) return; dragging = false; fab.classList.remove('dragging'); clamp(); };
+  fab.addEventListener('pointerup', stop);
+  fab.addEventListener('pointercancel', stop);
+  window.addEventListener('resize', clamp);
+})();
+
+let bookingFallback = null, agentSpeaking = false, agentQuietSince = performance.now();
+
+/* Return home only once Maya has stopped talking for a moment. */
+function finishBooking(ref, status, dom){
+  const started = performance.now();
+  (function wait(){
+    const quietFor = performance.now() - agentQuietSince;
+    const waited = performance.now() - started;
+    if ((agentSpeaking || quietFor < 1500) && waited < 15000) return setTimeout(wait, 250);
+    if (vpDomain) closeViewport();
+    showToast(ref, dom, status);
+    tick();
+  })();
+}
+
+function shareLocation(){
+  if (!navigator.geolocation) return;
+  navigator.geolocation.getCurrentPosition(p => {
+    fetch('/api/location', { method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ lat:p.coords.latitude, lng:p.coords.longitude, accuracy:p.coords.accuracy }) });
+  }, () => {}, { enableHighAccuracy:true, timeout:8000, maximumAge:60000 });
+}
+
+async function checkProfile(){
+  try {
+    const r = await fetch('/api/profile'); if (!r.ok) return;
+    const p = await r.json();
+    document.getElementById('ec-warn').style.display = p.has_emergency_contact ? 'none' : 'inline-flex';
+  } catch (e) {}
+}
+
+function showToast(ref, dom, status){
+  const t = document.getElementById('toast');
+  document.getElementById('toast-ref').textContent = ref || '';
+  document.getElementById('toast-dom').textContent = dom ? dom.charAt(0).toUpperCase() + dom.slice(1) : 'Booking';
+  document.getElementById('toast-note').textContent =
+    status === 'ok' ? 'confirmation and calendar link sent'
+    : status === 'failed' ? 'saved \u2014 the confirmation email could not be sent'
+    : 'saved';
+  t.classList.toggle('warn', status === 'failed');
+  t.classList.remove('show'); void t.offsetWidth; t.classList.add('show');
+  clearTimeout(t._t); t._t = setTimeout(() => t.classList.remove('show'), 6500);
+}
+
+/* React to ANY screen instruction from Maya, including 'hotel' when
+   the active domain was already hotel. */
+async function pollViewState(){
+  try {
+    const r = await fetch('/api/view-state');
+    if (!r.ok) return;
+    const v = await r.json();
+    if (seenViewTs === null) { seenViewTs = v.ts || 0; return; }
+    if (!v.ts || v.ts === seenViewTs) return;
+    seenViewTs = v.ts;
+    if (v.mode === 'emergency') shareLocation();
+    if (v.mode === 'booked') {
+      // wait for the confirmation to finish; safety net if it never reports back
+      clearTimeout(bookingFallback);
+      bookingFallback = setTimeout(() => finishBooking(v.focus, 'unknown', v.domain), 25000);
+      return;
+    }
+    if (v.mode === 'sent') {
+      clearTimeout(bookingFallback);
+      const [ref, status] = String(v.focus || '').split('|');
+      finishBooking(ref, status, v.domain);
+      return;
+    }
+    if (connected && v.domain && vpDomain !== v.domain) openViewport(v.domain);
+  } catch (e) {}
+}
+
+(function(){ const n=(document.getElementById('uname').textContent||'U').trim(); document.getElementById('avatar').textContent=(n[0]||'U').toUpperCase(); })();
+
+checkProfile();
+loadActive();
+tick();
+setInterval(tick, 2000);
+setInterval(loadActive, 1500);
+setInterval(pollViewState, 1200);
+</script>
+</body>
+</html>
